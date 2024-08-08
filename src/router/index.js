@@ -56,7 +56,13 @@ const routes = [
       id:'123456'
     },
     component:() => import('../views/ParamsTest.vue')
-  }
+  },
+  {
+    path:'/books',
+    name:'books',
+    component: () => import('../views/BooksTable.vue')
+  },
+
 ]
 
 const router = createRouter({

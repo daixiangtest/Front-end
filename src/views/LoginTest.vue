@@ -14,11 +14,25 @@
         <h2>{{ $store.state.userStore.name }}</h2>
         <h2>{{ $store.state.goodsStore.name }}</h2>
      </div>
+     <div>用户名：<el-input v-model="user" style="width: 240px" placeholder="Please input" /></div>
+     <div>
+       密码： <el-input v-model="pwd" style="width: 240px" type="password" placeholder="Please input password" show-password />
+     </div>
+     <div><el-button type="primary" plain @click="login">点击登录</el-button></div>
 </template>
   
 <script>
 import { mapState,mapGetters,mapMutations, mapActions } from 'vuex';
+import axios from 'axios';
+import { ElMessage } from 'element-plus'
 export default{
+    data(){
+        return{
+            user:'',
+            pwd :''
+        }
+        
+    },
     methods:{
         ...mapMutations(['updateAge']),
         ...mapActions(['timeAge']),
@@ -28,6 +42,33 @@ export default{
         },
         reAge(){
             this.updateAge(this.age-1)
+        },
+        login(){
+            var data={
+                'user':this.user,
+                'passwd':this.pwd,
+                
+            }
+            axios.post('http://127.0.0.1:8000/login/',data).then(
+                response =>{
+                    const data=response.data
+                    if (data.message==="登录成功"){
+                        ElMessage({
+                        message: '登录成功',
+                        type: 'success',
+                        })
+                        this.$router.push({name:'books'})
+                    }else{
+                        ElMessage.error('登录失败')
+                    }
+                    console.log(response)
+                }
+            ).catch(
+                error =>{
+                    ElMessage.error('请求失败')
+                    console.log(error)
+                }
+            )
         }
 
     },

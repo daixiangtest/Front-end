@@ -13,6 +13,7 @@
         <div><el-button type="success" plain @click="this.$router.push({path:'/'})">首页</el-button></div>
         <div><el-button type="success" plain @click="this.$router.push({name:'about'})">重定向</el-button></div>
         <div><el-button type="success" plain @click="this.$router.push({name:'params',params:{id:100,name:'dx'},query:{key:'你好'}})">参数传递</el-button></div>
+        <div><el-button type="primary" plain @click="this.$router.push({name:'books'})">图书列表</el-button></div>
       </el-aside>
       <el-main style="background: green;height: 800px;">
         <RouterView></RouterView>
