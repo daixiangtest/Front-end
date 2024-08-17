@@ -68,6 +68,7 @@ export default{
                 response => {
                     console.log(response)
                 }
+                // 失败执行的方法
             ).catch(
                 error => {
                     console.log(error)

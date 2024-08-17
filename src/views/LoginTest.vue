@@ -19,6 +19,7 @@
        密码： <el-input v-model="pwd" style="width: 240px" type="password" placeholder="Please input password" show-password />
      </div>
      <div><el-button type="primary" plain @click="login">点击登录</el-button></div>
+     <div><el-button type="primary" plain @click="login1">点击登录2</el-button></div>
 </template>
   
 <script>
@@ -69,6 +70,14 @@ export default{
                     console.log(error)
                 }
             )
+        },
+        // 通过async 声明为异步函数
+        async login1(){
+            let data={'user':this.user,
+                'passwd':this.pwd}
+                // 通过awit 等待获取请求结果，并赋值给res变量
+            let res=await axios.post('http://127.0.0.1:8000/login/',data)
+            console.log("结合async获取的respose:",res)
         }
 
     },
